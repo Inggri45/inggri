@@ -1,1 +1,121 @@
 /* You can add global styles to this file, and also import other style files */
+
+body.login-page {
+  background: url('/dist/img/latar.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+body.dark-mode {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+body.dark-mode .main-header.navbar {
+  background-color: #111827 !important;
+  border-bottom: 1px solid #1f2937;
+}
+
+body.dark-mode .main-header.navbar .nav-link,
+body.dark-mode .main-header.navbar .navbar-brand,
+body.dark-mode .main-header.navbar .navbar-text,
+body.dark-mode .main-header.navbar .navbar-nav .nav-link {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .main-sidebar,
+body.dark-mode .sidebar {
+  background-color: #111827 !important;
+}
+
+body.dark-mode .content-wrapper,
+body.dark-mode .content,
+body.dark-mode .content-header,
+body.dark-mode .card,
+body.dark-mode .card-body,
+body.dark-mode .card-header,
+body.dark-mode .card-footer,
+body.dark-mode .info-box,
+body.dark-mode .info-box-content,
+body.dark-mode .table,
+body.dark-mode .table-striped,
+body.dark-mode .description-block,
+body.dark-mode .form-control,
+body.dark-mode .progress {
+  background-color: #1f2937 !important;
+  color: #e2e8f0 !important;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .card-header {
+  border-bottom: 1px solid #334155 !important;
+}
+
+body.dark-mode .breadcrumb,
+body.dark-mode .breadcrumb-item a,
+body.dark-mode .breadcrumb-item.active {
+  background: transparent !important;
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .content-header .breadcrumb .breadcrumb-item a {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .content-header .breadcrumb .breadcrumb-item.active {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .card .card-title,
+body.dark-mode .card .card-text,
+body.dark-mode .info-box-text,
+body.dark-mode .info-box-number,
+body.dark-mode .description-text,
+body.dark-mode .description-header {
+  color: #e2e8f0 !important;
+}
+
+body.dark-mode .nav-sidebar .nav-link,
+body.dark-mode .nav-sidebar .nav-link p,
+body.dark-mode .nav-sidebar .nav-link i {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .nav-sidebar .nav-link.active {
+  background-color: #2563eb !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .main-footer {
+  background-color: #111827 !important;
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .control-sidebar {
+  background-color: #0f172a !important;
+}
+
+/* Override DataTables responsive expand/collapse icons */
+table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before,
+table.dataTable.dtr-column>tbody>tr>td.control:before,
+table.dataTable.dtr-column>tbody>tr>th.control:before {
+  content: '\25B6' !important;
+  font-size: 12px !important;
+  color: white !important;
+  background-color: #2563eb !important;
+  border-color: white !important;
+  border-style: solid !important;
+  border-width: 2px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.35) !important;
+  text-indent: 0 !important;
+  line-height: 14px !important;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before,
+table.dataTable.dtr-column>tbody>tr.parent td.control:before,
+table.dataTable.dtr-column>tbody>tr.parent th.control:before {
+  content: '\25BC' !important;
+  background-color: #dc2626 !important;
+}

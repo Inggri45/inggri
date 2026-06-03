@@ -1,17 +1,48 @@
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { AUTH_COOKIE_USER_ID, decryptUserId } from '../auth-crypto';
 
 declare const $: any;
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [ RouterModule],
+  imports: [RouterModule],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.css',
+  styleUrls: ['./sidebar.css'],
 })
-export class Sidebar implements AfterViewInit, OnDestroy {
-  @Input() moduleName: string = "";
+export class Sidebar implements OnInit, AfterViewInit, OnDestroy {
+  @Input() moduleName = '';
+  username = '';
+  private _header: HTMLElement | null = null;
+
+  constructor(private cookieService: CookieService, private router: Router) {}
+
+  ngOnInit(): void {
+    const savedUserId = decryptUserId(this.cookieService.get(AUTH_COOKIE_USER_ID));
+    this.username = savedUserId === 'idmana' ? 'Inggri Eka Pratiwi' : savedUserId || 'Inggri Eka Pratiwi';
+    this._header = document.querySelector('.main-header');
+    this.initializeTheme();
+  }
+
+  private initializeTheme(): void {
+    const saved = localStorage.getItem('adminlte-theme');
+    const isDark = saved === 'dark';
+    document.body.classList.toggle('dark-mode', isDark);
+
+    if (!this._header) {
+      return;
+    }
+
+    if (isDark) {
+      this._header.classList.remove('navbar-white', 'navbar-light');
+      this._header.classList.add('navbar-dark', 'navbar-primary');
+    } else {
+      this._header.classList.remove('navbar-dark', 'navbar-primary');
+      this._header.classList.add('navbar-white', 'navbar-light');
+    }
+  }
 
   ngAfterViewInit(): void {
     if (typeof $ === 'undefined') {
@@ -29,6 +60,38 @@ export class Sidebar implements AfterViewInit, OnDestroy {
 
       this.bindMobileSidebarOverlayClose();
     }, 0);
+  }
+
+  toggleTheme(): void {
+    const isDark = document.body.classList.toggle('dark-mode');
+
+    if (!this._header) {
+      this._header = document.querySelector('.main-header');
+    }
+
+    if (this._header) {
+      if (isDark) {
+        this._header.classList.remove('navbar-white', 'navbar-light');
+        this._header.classList.add('navbar-dark', 'navbar-primary');
+      } else {
+        this._header.classList.remove('navbar-dark', 'navbar-primary');
+        this._header.classList.add('navbar-white', 'navbar-light');
+      }
+    }
+
+    localStorage.setItem('adminlte-theme', isDark ? 'dark' : 'light');
+  }
+
+  confirmLogout(event: Event): void {
+    event.preventDefault();
+
+    const confirmed = window.confirm('Yakin ingin keluar?');
+    if (!confirmed) {
+      return;
+    }
+
+    this.cookieService.deleteAll();
+    this.router.navigate(['/login']);
   }
 
   ngOnDestroy(): void {

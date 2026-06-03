@@ -13,7 +13,7 @@ declare const Sparkline: any;
   standalone: true,
   imports: [Header, Sidebar, Footer, RouterModule],
   templateUrl: './dashboard1.html',
-  styleUrl: './dashboard1.css',
+  styleUrls: ['./dashboard1.css'],
 })
 export class Dashboard1 implements AfterViewInit {
   ngAfterViewInit(): void {

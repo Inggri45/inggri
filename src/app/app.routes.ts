@@ -6,15 +6,20 @@ import { Dashboard1 } from './dashboard1/dashboard1';
 import { Dashboard2 } from './dashboard2/dashboard2';
 import { Dashboard3 } from './dashboard3/dashboard3';
 import { Mahasiswa } from './mahasiswa/mahasiswa';
+import { LogoutComponent } from './logout/logout';
+import { otentikasiGuard } from './otentikasi-guard';
+import { Forex } from './forex/forex';
 
 
 export const routes: Routes = [
   {path: "", redirectTo: 'login', pathMatch: 'full'},
   {path: "admin", component: Admin},
   {path: "dashboard", redirectTo: 'dashboard1', pathMatch: 'full'},
-  {path: "dashboard1", component: Dashboard1},
-  {path: "dashboard2", component: Dashboard2},
-  {path: "dashboard3", component: Dashboard3},
+  {path: "dashboard1", component: Dashboard1, canActivate: [otentikasiGuard] },
+  {path: "dashboard2", component: Dashboard2, canActivate: [otentikasiGuard] },
+  {path: "dashboard3", component: Dashboard3, canActivate: [otentikasiGuard] },
+  {path: "forex", component: Forex, canActivate: [otentikasiGuard] },
+  {path: "logout", component: LogoutComponent},
   {path: "login", component: LoginComponent},
-  {path: "mahasiswa", component: Mahasiswa}
+  {path: "mahasiswa", component: Mahasiswa, canActivate: [otentikasiGuard] }
 ];

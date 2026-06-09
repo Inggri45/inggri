@@ -1,0 +1,73 @@
+<div class="wrapper">
+    <app-header></app-header>
+    <app-sidebar moduleName="nasa"></app-sidebar>
+    <div class="content-wrapper">
+        <!-- Header -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">
+                            NASA Picture Of The Day
+                        </h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item">
+                                <a href="/dashboard">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                NASA
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Astronomy Picture Of The Day
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div *ngIf="loading" class="text-center">
+                                    <i class="fas fa-spinner fa-spin fa-3x"></i>
+                                    <p class="mt-3">Loading NASA Data</p>
+                                </div>
+
+                                <div *ngIf="!loading && nasaData">
+                                    <h3 class="mb-3">
+                                        {{ nasaData.title }}
+                                    </h3>
+                                    <p>
+                                        <strong>Date :</strong>
+                                        {{ nasaData.date }}
+                                    </p>
+                                    <img
+                                        [src]="nasaData.url"
+                                        class="img-fluid rounded shadow mb-4"
+                                        alt="NASA Image">
+                                    <p style="text-align: justify;">
+                                        {{ nasaData.explanation }}
+                                    </p>
+                                </div>
+
+                                <div *ngIf="!loading && !nasaData" class="text-center text-danger">
+                                    <p>Data NASA tidak tersedia.</p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>

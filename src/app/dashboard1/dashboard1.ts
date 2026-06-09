@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Header } from '../header/header';
 import { Sidebar } from '../sidebar/sidebar';
 import { Footer } from '../footer/footer';
@@ -16,11 +17,29 @@ declare const Sparkline: any;
   styleUrls: ['./dashboard1.css'],
 })
 export class Dashboard1 implements AfterViewInit {
+  constructor(private http: HttpClient) {}
+
   ngAfterViewInit(): void {
-    this.initDashboardCharts();
+    // Code to run after the view is initialized
+    $('body').removeClass('sidebar-open');
+    $('body').addClass('sidebar-closed sidebar-collapsed');
+
+    this.loadDashboardCharts();
   }
 
-  private initDashboardCharts(): void {
+  private loadDashboardCharts(): void {
+    if (typeof $ === 'undefined' || typeof Chart === 'undefined') {
+      return;
+    }
+
+    this.http.get<any>('https://stmikpontianak.cloud/011100862/laporan_bulananHimasha.php')
+      .subscribe({
+        next: response => this.initDashboardCharts(response),
+        error: () => this.initDashboardCharts()
+      });
+  }
+
+  private initDashboardCharts(response?: any): void {
     if (typeof $ === 'undefined' || typeof Chart === 'undefined') {
       return;
     }
@@ -28,7 +47,22 @@ export class Dashboard1 implements AfterViewInit {
     const revenueCanvas = $('#revenue-chart-canvas').get(0);
     if (revenueCanvas) {
       const revenueCtx = revenueCanvas.getContext('2d');
-      const revenueData = {
+      const revenueData = response && response.labels && response.datasets ? {
+        labels: response.labels,
+        datasets: response.datasets.map((dataset: any) => {
+          const isMale = dataset.label === 'Laki-laki';
+          return {
+            ...dataset,
+            backgroundColor: dataset.backgroundColor ?? (isMale ? 'rgba(60,141,188,0.9)' : 'rgba(210, 214, 222, 1)'),
+            borderColor: dataset.borderColor ?? (isMale ? 'rgba(60,141,188,0.8)' : 'rgba(210, 214, 222, 1)'),
+            pointRadius: false,
+            pointColor: isMale ? '#3b8bba' : 'rgba(210, 214, 222, 1)',
+            pointStrokeColor: isMale ? 'rgba(60,141,188,1)' : '#c1c7d1',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: isMale ? 'rgba(60,141,188,1)' : 'rgba(220,220,220,1)'
+          };
+        })
+      } : {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
           {
@@ -86,7 +120,13 @@ export class Dashboard1 implements AfterViewInit {
     const salesCanvas = $('#sales-chart-canvas').get(0);
     if (salesCanvas) {
       const salesCtx = salesCanvas.getContext('2d');
-      const pieData = {
+      const pieData = response && response.donutLabels && response.donutData ? {
+        labels: response.donutLabels,
+        datasets: [{
+          data: response.donutData,
+          backgroundColor: ['#f56954', '#00a65a', '#f39c12']
+        }]
+      } : {
         labels: ['Instore Sales', 'Download Sales', 'Mail-Order Sales'],
         datasets: [{
           data: [30, 12, 20],

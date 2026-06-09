@@ -1,8 +1,9 @@
 .main-sidebar .brand-link {
   padding-left: 1rem;
-  .main-sidebar,
+}
+
+.main-sidebar,
 .content-wrapper,
 .main-header {
   transition: all 0.3s ease;
-}
 }

@@ -1,3 +1,4 @@
+@import "../node_modules/leaflet/dist/leaflet.css";
 /* You can add global styles to this file, and also import other style files */
 
 body.login-page {
@@ -92,6 +93,27 @@ body.dark-mode .main-footer {
 
 body.dark-mode .control-sidebar {
   background-color: #0f172a !important;
+}
+
+/* Ensure the sidebar fills the full viewport height */
+.wrapper {
+  min-height: 100vh;
+}
+
+.main-sidebar {
+  min-height: 100vh;
+}
+
+.main-sidebar .sidebar {
+  min-height: 100vh;
+}
+
+body.sidebar-mini .main-sidebar,
+body.sidebar-closed .main-sidebar,
+body.sidebar-open .main-sidebar,
+body.sidebar-collapse .main-sidebar,
+body.sidebar-collapsed .main-sidebar {
+  min-height: 100vh;
 }
 
 /* Override DataTables responsive expand/collapse icons */

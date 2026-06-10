@@ -1,59 +1,88 @@
 <div class="wrapper">
-    <app-header></app-header>
-    <app-sidebar moduleName="saham"></app-sidebar>
-    <!-- Content Wrapper -->
-    <div class="content-wrapper">
+  <app-header></app-header>
+  <app-sidebar moduleName="saham"></app-sidebar>
+  <div class="content-wrapper">
+<section class="content">
+    <div class="container-fluid">
 
-        <!-- Content Header -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">
-                            Data Saham
-                        </h1>
+        <!-- CARD STATISTIK -->
+        <div class="row mb-3">
+            <div class="col-lg-4 col-12">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{ naik }}</h3>
+                        <p>Saham Naik</p>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item">
-                                <a href="/dashboard">Home</a>
-                            </li>
-                            <li class="breadcrumb-item active">
-                                Saham
-                            </li>
-                        </ol>
+                    <div class="icon">
+                        <i class="fas fa-arrow-up"></i>
                     </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-12">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ turun }}</h3>
+                        <p>Saham Turun</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-12">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ total }}</h3>
+                        <p>Total Saham</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- GRAFIK -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Grafik Harga Saham
+                </h3>
+            </div>
+            <div class="card-body">
+                <div style="height:400px;">
+                    <canvas id="stockChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- Main Content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div id="tanggal" class="mb-3 font-weight-bold"></div>
-                    <div class="table-responsive">
-                        <table
-                            id="table1"
-                            class="table table-hover table-bordered table-striped">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Symbol</th>
-                                    <th>Perusahaan</th>
-                                    <th>Harga (USD)</th>
-                                    <th>Perubahan</th>
-                                    <th>% Perubahan</th>
-                                    <th>Volume</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
+        <!-- TABEL -->
+        <div class="row">
+            <div class="col-12">
+                <div id="tanggal" class="mb-3 font-weight-bold"></div>
+                <div class="table-responsive">
+                    <table
+                        id="table1"
+                        class="table table-hover table-bordered table-striped">
+                        <thead class="bg-primary">
+                            <tr>
+                                <th>No</th>
+                                <th>Symbol</th>
+                                <th>Perusahaan</th>
+                                <th>Harga (USD)</th>
+                                <th>Perubahan</th>
+                                <th>% Perubahan</th>
+                                <th>Volume</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
-    <app-footer></app-footer>
-</div>
+</section>
+<app-footer></app-footer>

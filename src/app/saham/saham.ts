@@ -4,8 +4,11 @@ import { Header } from '../header/header';
 import { Sidebar } from '../sidebar/sidebar';
 import { Footer } from '../footer/footer';
 import { HttpClient } from '@angular/common/http';
+import Chart from 'chart.js/auto';
+import { forkJoin } from 'rxjs';
 
 declare const $: any;
+
 @Component({
   selector: 'app-saham',
   standalone: true,
@@ -14,19 +17,30 @@ declare const $: any;
   styleUrl: './saham.css'
 })
 export class Saham implements AfterViewInit {
+
   private _table1: any;
+  // Statistik
+  naik = 0;
+  turun = 0;
+  total = 0;
+
+  // Data Grafik
+  stockNames: string[] = [];
+  stockPrices: number[] = [];
+  chart: any;
+
   constructor(
     private renderer: Renderer2,
     private httpClient: HttpClient
   ) {}
 
   ngAfterViewInit(): void {
-    // Mengatur sidebar
+    // Sidebar setup
     this.renderer.removeClass(document.body, 'sidebar-open');
     this.renderer.addClass(document.body, 'sidebar-closed');
     this.renderer.addClass(document.body, 'sidebar-collapsed');
 
-    // Inisialisasi DataTable
+    // DataTable init
     this._table1 = $('#table1').DataTable({
       columnDefs: [
         {
@@ -38,7 +52,6 @@ export class Saham implements AfterViewInit {
 
     this.bindTable1();
   }
-
   bindTable1(): void {
     const apiKey = 'e49e65d8bfe84ac59f70d2d4bf27470e';
     const symbols = [
@@ -51,41 +64,106 @@ export class Saham implements AfterViewInit {
       'GOOGL'
     ];
 
+    // Tanggal
     $('#tanggal').html(
       'Data Saham per tanggal ' + this.formatDate(new Date())
     );
 
+    // RESET DATA
     this._table1.clear();
+    this._table1.draw(false);
+    this.naik = 0;
+    this.turun = 0;
+    this.total = 0;
+    this.stockNames = [];
+    this.stockPrices = [];
     let no = 1;
-    symbols.forEach(symbol => {
-      const url =
-        `https://api.twelvedata.com/quote?symbol=${symbol}&apikey=${apiKey}`;
-      this.httpClient.get(url).subscribe({
-        next: (data: any) => {
-          const harga = parseFloat(data.close || 0).toFixed(2);
-          const perubahan = parseFloat(data.change || 0).toFixed(2);
-          const persen = parseFloat(data.percent_change || 0).toFixed(2);
+
+    // ForkJoin
+    const requests = symbols.map(symbol => {
+      const url = `https://api.twelvedata.com/quote?symbol=${symbol}&apikey=${apiKey}`;
+      return this.httpClient.get(url);
+    });
+
+    forkJoin(requests).subscribe({
+      next: (results: any[]) => {
+        results.forEach((data: any) => {
+          const harga = parseFloat(data.close || 0);
+          const perubahan = parseFloat(data.change || 0);
+          const persen = parseFloat(data.percent_change || 0);
           const volume = Number(data.volume || 0).toLocaleString();
+
+          // Statistik
+          this.total++;
+          if (perubahan >= 0) {
+            this.naik++;
+          } else {
+            this.turun++;
+          }
+
+          // Data chart
+          this.stockNames.push(data.symbol);
+          this.stockPrices.push(harga);
+
+          // Table row
           const row = [
             no++,
             data.symbol,
             data.name,
-            harga,
-            perubahan,
-            persen + '%',
+            '$ ' + harga.toFixed(2),
+            perubahan.toFixed(2),
+            persen.toFixed(2) + '%',
             volume
           ];
+
           this._table1.row.add(row);
-          this._table1.draw(false);
+        });
+
+        // render table sekali saja (lebih stabil)
+        this._table1.draw(false);
+
+        // buat chart
+        this.createChart();
+      },
+      error: (err) => {
+        console.error('Gagal mengambil data saham:', err);
+      }
+    });
+  }
+
+  createChart(): void {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+    const canvas = document.getElementById('stockChart') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    this.chart = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: this.stockNames,
+        datasets: [
+          {
+            label: 'Harga Saham (USD)',
+            data: this.stockPrices,
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true
+          }
         },
-        error: (err) => {
-          console.error(
-            'Gagal mengambil data saham:',
-            symbol,
-            err
-          );
+        scales: {
+          y: {
+            beginAtZero: false
+          }
         }
-      });
+      }
     });
   }
 

@@ -1,9 +1,125 @@
-.main-sidebar .brand-link {
-  padding-left: 1rem;
+/* =========================
+   SIDEBAR GLASSMORPHISM
+========================= */
+
+.main-sidebar{
+    background:
+    rgba(15,23,42,.55)!important;
+    backdrop-filter:
+    blur(25px);
+    -webkit-backdrop-filter:
+    blur(25px);
+    border-right:
+    1px solid rgba(255,255,255,.08);
+    box-shadow:
+    5px 0 25px rgba(0,0,0,.25);
 }
 
-.main-sidebar,
-.content-wrapper,
-.main-header {
-  transition: all 0.3s ease;
+/* LOGO */
+.brand-link{
+    background:
+    rgba(255,255,255,.03);
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
+}
+
+/* USER PANEL */
+.user-panel{
+    background:
+    rgba(255,255,255,.03);
+    border-radius:15px;
+    padding:10px;
+}
+
+/* MENU */
+.nav-sidebar .nav-link{
+    border-radius:15px;
+    margin-bottom:5px;
+    transition:.3s;
+}
+
+/* HOVER MENU */
+.nav-sidebar .nav-link:hover{
+    background:
+    rgba(255,255,255,.08)!important;
+    backdrop-filter:
+    blur(10px);
+    transform:
+    translateX(5px);
+}
+
+/* MENU ACTIVE */
+.nav-sidebar .nav-link.active{
+    background:
+    linear-gradient(
+    135deg,
+    rgba(59,130,246,.6),
+    rgba(139,92,246,.6)
+    )!important;
+    color:white!important;
+    box-shadow:
+    0 0 20px rgba(59,130,246,.3);
+}
+
+/* ICON */
+.nav-sidebar .nav-icon{
+    color:#cbd5e1;
+}
+
+/* SEARCH */
+.sidebar .form-control{
+    background:
+    rgba(255,255,255,.08)!important;
+    border:
+    1px solid rgba(255,255,255,.12)!important;
+    color:white!important;
+    border-radius:15px 0 0 15px;
+}
+
+.sidebar .btn-sidebar{
+    background:
+    rgba(255,255,255,.08)!important;
+    border:
+    1px solid rgba(255,255,255,.12)!important;
+    color:white!important;
+    border-radius:0 15px 15px 0;
+}
+
+/* BADGE NEW */
+.badge-danger{
+    background:
+    linear-gradient(
+    135deg,
+    #ef4444,
+    #dc2626
+    )!important;
+    border-radius:20px;
+    padding:5px 10px;
+    box-shadow:
+    0 0 10px rgba(239,68,68,.4);
+}
+.main-sidebar::before{
+    content:'';
+    position:absolute;
+    width:250px;
+    height:250px;
+    top:-100px;
+    left:-100px;
+    background:#3b82f6;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:.25;
+}
+
+.main-sidebar::after{
+    content:'';
+    position:absolute;
+    width:250px;
+    height:250px;
+    bottom:-100px;
+    right:-100px;
+    background:#8b5cf6;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:.25;
 }

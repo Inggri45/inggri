@@ -14,7 +14,7 @@ declare const $: any;
   standalone: true,
   imports: [Footer, Header, Sidebar, CommonModule],
   templateUrl: './saham.html',
-  styleUrl: './saham.css'
+  styleUrls: ['./saham.css']
 })
 export class Saham implements AfterViewInit {
 
@@ -42,12 +42,43 @@ export class Saham implements AfterViewInit {
 
     // DataTable init
     this._table1 = $('#table1').DataTable({
+      responsive: {
+        breakpoints: [
+          { name: 'desktop', width: Infinity },
+          { name: 'tablet', width: 1024 },
+          { name: 'phone', width: 768 }
+        ],
+        details: {
+          type: 'column',
+          target: 0,
+          renderer: function (api: any, rowIdx: number, columns: any[]) {
+            const data = columns
+              .filter((col: any) => col.hidden && col.title && col.title !== '')
+              .map((col: any) => {
+                return '<tr>' +
+                  '<td class="font-weight-bold">' + col.title + '</td>' +
+                  '<td>' + col.data + '</td>' +
+                  '</tr>';
+              })
+              .join('');
+
+            return data ? '<table class="table table-sm table-borderless mb-0">' + data + '</table>' : false;
+          }
+        }
+      },
       columnDefs: [
         {
-          targets: [3, 4, 5, 6],
+          className: 'control',
+          orderable: false,
+          targets: 0
+        },
+        {
+          targets: [4, 5, 6, 7],
           className: 'text-right'
         }
-      ]
+      ],
+      order: [[1, 'asc']],
+      autoWidth: false
     });
 
     this.bindTable1();
@@ -107,6 +138,7 @@ export class Saham implements AfterViewInit {
 
           // Table row
           const row = [
+            '',
             no++,
             data.symbol,
             data.name,

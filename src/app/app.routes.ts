@@ -11,6 +11,7 @@ import { LogoutComponent } from './logout/logout';
 import { otentikasiGuard } from './otentikasi-guard';
 import { Forex } from './forex/forex';
 import { Saham } from './saham/saham';
+import { Crypto } from './crypto/crypto';
 import { Nasa } from './nasa/nasa';
 import { Gallery } from './gallery/gallery';
 
@@ -24,9 +25,13 @@ export const routes: Routes = [
   {path: "dashboard3", component: Dashboard3, canActivate: [otentikasiGuard] },
   {path: "forex", component: Forex, canActivate: [otentikasiGuard] },
   {path: "saham", component: Saham, canActivate: [otentikasiGuard] },
+  {path: "crypto", component: Crypto, canActivate: [otentikasiGuard] },
   {path: "gallery", component: Gallery, canActivate: [otentikasiGuard] },
   {path: "logout", component: LogoutComponent},
   {path: "login", component: LoginComponent},
   {path: "nasa", component: Nasa, canActivate: [otentikasiGuard] },
   {path: "mahasiswa", component: Mahasiswa, canActivate: [otentikasiGuard] }
 ];
+
+
+

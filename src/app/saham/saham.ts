@@ -109,8 +109,6 @@ export class Saham implements AfterViewInit {
     this.stockNames = [];
     this.stockPrices = [];
     let no = 1;
-
-    // ForkJoin
     const requests = symbols.map(symbol => {
       const url = `https://api.twelvedata.com/quote?symbol=${symbol}&apikey=${apiKey}`;
       return this.httpClient.get(url);

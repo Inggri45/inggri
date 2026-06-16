@@ -1,0 +1,454 @@
+:host {
+  display: block;
+}
+
+.crypto-page {
+  background: linear-gradient(180deg, #f0f0f3 0%, #ecedf0 100%);
+  min-height: 100vh;
+  color: #eef2ff;
+}
+
+.content-header {
+  padding: 20px 0;
+}
+
+.page-title {
+  margin: 0;
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.page-subtitle {
+  color: #b8c7ff;
+  margin: 8px 0 0;
+}
+
+.update-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd6ff;
+  font-size: 14px;
+}
+
+.summary-cards {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+/* Default: allow cards to be 100% on very small screens */
+.summary-cards .col-xl-3,
+.summary-cards .col-md-6 {
+  display: flex;
+  box-sizing: border-box;
+}
+
+/* Desktop: force four equal columns in one row */
+@media (min-width: 1200px) {
+  .summary-cards .col-xl-3 {
+    flex: 0 0 calc(25% - 9px);
+    max-width: calc(25% - 9px);
+  }
+}
+
+/* Large tablets / small desktops: keep them in one row if space allows */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .summary-cards .col-xl-3,
+  .summary-cards .col-md-6 {
+    flex: 0 0 calc(25% - 9px);
+    max-width: calc(25% - 9px);
+  }
+}
+
+/* Mobile: two columns */
+@media (max-width: 991px) {
+  .summary-cards .col-xl-3,
+  .summary-cards .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+.summary-cards .summary-card {
+  border: none;
+  border-radius: 22px;
+  padding: 20px;
+  flex: 1 1 auto;
+  min-height: 140px;
+  box-shadow: 0 16px 50px rgba(7, 14, 36, 0.3);
+}
+
+.summary-card .card-label {
+  font-size: 14px;
+  color: #9aa9d6;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.summary-card .card-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.summary-card .card-caption {
+  margin-top: 10px;
+  color: #a0b0d8;
+  font-size: 13px;
+}
+
+.card-purple {
+  background: linear-gradient(135deg, #5b45ff 0%, #1f2f9c 100%);
+}
+
+.card-blue {
+  background: linear-gradient(135deg, #1c73ff 0%, #0f1f4d 100%);
+}
+
+.card-green {
+  background: linear-gradient(135deg, #1bd98a 0%, #136f58 100%);
+}
+
+.card-orange {
+  background: linear-gradient(135deg, #ffaa24 0%, #8c4a11 100%);
+}
+
+.market-section .market-card,
+.market-section .movers-card,
+.table-card {
+  border: none;
+  border-radius: 24px;
+  background: rgba(117, 129, 167, 0.96);
+  color: #e5ecff;
+  box-shadow: 0 20px 60px rgba(234, 226, 226, 0.14);
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(216, 199, 199, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 24px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.card-actions,
+.table-meta {
+  color: #9ea8d4;
+  font-size: 13px;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.chart-card-header {
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.chart-subtitle {
+  margin-top: 6px;
+  color: #a9b7d9;
+  font-size: 14px;
+}
+
+.range-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.range-buttons button {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: #e4ebff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.range-buttons button.active,
+.range-buttons button:hover {
+  background: rgba(123, 92, 255, 0.18);
+  border-color: rgba(123, 92, 255, 0.35);
+}
+
+.chart-summary-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.chart-summary-item {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.chart-summary-label {
+  font-size: 12px;
+  color: #9faecf;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.chart-summary-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.chart-wrapper {
+  min-height: 360px;
+}
+
+#cryptoTrendChart {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.chart-placeholder {
+  display: none;
+}
+
+.movers-card {
+  overflow: hidden;
+}
+
+.mover-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mover-row:last-child {
+  border-bottom: none;
+}
+
+.mover-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mover-name img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.mover-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.mover-value {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.mover-row.positive .mover-value {
+  color: #56d68f;
+}
+
+.mover-row.negative .mover-value {
+  color: #ff6978;
+}
+
+.table-card .table-responsive {
+  overflow-x: auto;
+}
+
+.table-card table {
+  min-width: 100%;
+  color: #d8e1ff;
+}
+
+.table-card th,
+.table-card td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: middle;
+}
+
+.table-card th {
+  color: #9ea8d4;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.coin-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.coin-cell img {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* DataTables length dropdown: hidden on desktop, visible on small screens */
+.dataTables_length {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .dataTables_length {
+    display: block;
+    margin-bottom: 12px;
+  }
+}
+
+.coin-name {
+  display: block;
+  font-weight: 700;
+  color: #f7f9ff;
+}
+
+.coin-symbol {
+  color: #8b9ac4;
+  font-size: 12px;
+}
+
+.market-change {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+}
+
+.market-change.positive {
+  background: rgba(82, 215, 143, 0.12);
+  color: #56d68f;
+}
+
+.market-change.negative {
+  background: rgba(255, 105, 120, 0.14);
+  color: #ff6978;
+}
+
+.empty-state {
+  color: #97a4d6;
+  font-size: 14px;
+  padding: 18px 0;
+}
+
+@media (max-width: 767px) {
+  .card-header,
+  .card-body {
+    padding: 18px;
+  }
+
+  .page-title {
+    font-size: 26px;
+  }
+}
+
+/* Light mode overrides: apply by adding class `light-mode` to .crypto-page or body */
+.crypto-page.light-mode {
+  background: #f7f7f7;
+  color: #111827;
+}
+
+.crypto-page.light-mode .page-title,
+.crypto-page.light-mode .card-title {
+  color: #0f172a;
+}
+
+.crypto-page.light-mode .update-badge {
+  background: rgba(15, 23, 42, 0.06);
+  color: #0f172a;
+}
+
+.crypto-page.light-mode .summary-card {
+  background: #ffffff;
+  box-shadow: 0 6px 24px rgba(16,24,40,0.06);
+  color: #0f172a;
+  border: 1px solid #e6e9ef;
+}
+
+.crypto-page.light-mode .card-label {
+  color: #6b7280;
+}
+
+.crypto-page.light-mode .card-value {
+  color: #0b1220;
+}
+
+.crypto-page.light-mode .card-caption {
+  color: #6b7280;
+}
+
+.crypto-page.light-mode .market-card,
+.crypto-page.light-mode .movers-card,
+.crypto-page.light-mode .table-card {
+  background: #ffffff;
+  color: #0b1220;
+  border: 1px solid #e6e9ef;
+  box-shadow: 0 8px 30px rgba(10, 20, 40, 0.04);
+}
+
+.crypto-page.light-mode .chart-summary-item {
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+}
+
+.crypto-page.light-mode .range-buttons button {
+  color: #0b1220;
+  border-color: rgba(15, 23, 42, 0.06);
+}
+
+.crypto-page.light-mode .range-buttons button.active,
+.crypto-page.light-mode .range-buttons button:hover {
+  background: rgba(123, 92, 255, 0.06);
+}
+
+.crypto-page.light-mode .table-card table {
+  color: #0b1220;
+}
+
+.crypto-page.light-mode .table-card th {
+  color: #6b7280;
+}
+
+.crypto-page.light-mode .market-change.positive {
+  background: rgba(34,197,94,0.12);
+  color: #059669;
+}
+
+.crypto-page.light-mode .market-change.negative {
+  background: rgba(239,68,68,0.08);
+  color: #dc2626;
+}
+
+.crypto-page.light-mode .mover-name img,
+.crypto-page.light-mode .coin-cell img {
+  border-radius: 6px;
+  background: #ffffff;
+}

@@ -95,17 +95,20 @@ body.dark-mode .control-sidebar {
   background-color: #0f172a !important;
 }
 
-/* Ensure the sidebar fills the full viewport height */
+/* Let the sidebar follow the page/content height instead of forcing viewport height.
+   This makes the sidebar extend to the bottom when pages are taller than the viewport. */
 .wrapper {
-  min-height: 100vh;
+  min-height: auto;
 }
 
 .main-sidebar {
-  min-height: 100vh;
+  min-height: 100%;
+  height: auto;
 }
 
 .main-sidebar .sidebar {
-  min-height: 100vh;
+  min-height: 100%;
+  height: auto;
 }
 
 body.sidebar-mini .main-sidebar,
@@ -113,7 +116,7 @@ body.sidebar-closed .main-sidebar,
 body.sidebar-open .main-sidebar,
 body.sidebar-collapse .main-sidebar,
 body.sidebar-collapsed .main-sidebar {
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 /* Override DataTables responsive expand/collapse icons */

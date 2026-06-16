@@ -106,6 +106,17 @@
             </a>
           </li>
 
+          <!-- Menu Crypto -->
+          <li class="nav-item">
+            <a [routerLink]="['/crypto']"
+              class="nav-link {{ (moduleName == 'crypto') ? 'active' : ''}}">
+              <i class="nav-icon fab fa-bitcoin"></i>
+              <p>
+                Crypto
+              </p>
+            </a>
+          </li>
+
           <!-- Menambahkan Menu Nasa -->
           <li class="nav-item">
             <a [routerLink]="['/nasa']" routerLinkActive="active" class="nav-link {{ (moduleName == 'nasa') ? 'active' : ''}}">

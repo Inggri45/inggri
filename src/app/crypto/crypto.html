@@ -1,0 +1,166 @@
+<div class="wrapper">
+  <app-header></app-header>
+  <app-sidebar moduleName="crypto"></app-sidebar>
+
+  <div class="content-wrapper crypto-page">
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row align-items-center mb-4">
+          <div class="col-sm-6">
+            <h1 class="page-title">Crypto Dashboard</h1>
+            <p class="page-subtitle">Realtime market overview and top movers</p>
+          </div>
+          <div class="col-sm-6 text-sm-end">
+            <div class="update-badge">Updated: {{ lastUpdate }}</div>
+          </div>
+        </div>
+
+        <div class="row summary-cards">
+          <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card summary-card card-purple">
+              <div class="card-body">
+                <div class="card-label">Active Coins</div>
+                <div class="card-value">{{ activeCoins }}</div>
+                <div class="card-caption">Live crypto assets tracked</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card summary-card card-blue">
+              <div class="card-body">
+                <div class="card-label">Market Cap</div>
+                <div class="card-value">{{ marketCap }}</div>
+                <div class="card-caption">Total market capitalization</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card summary-card card-green">
+              <div class="card-body">
+                <div class="card-label">24h Volume</div>
+                <div class="card-value">{{ totalVolume }}</div>
+                <div class="card-caption">Trading volume last 24 hours</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card summary-card card-orange">
+              <div class="card-body">
+                <div class="card-label">Markets</div>
+                <div class="card-value">{{ totalMarkets }}</div>
+                <div class="card-caption">Total global crypto markets</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row market-section">
+          <div class="col-xl-8 mb-3">
+            <div class="card market-card">
+              <div class="card-header chart-card-header">
+                <div>
+                  <h3 class="card-title">Bitcoin Market Watch</h3>
+                  <div class="chart-subtitle">Realtime BTC price action and trend analysis</div>
+                </div>
+                <div class="range-buttons">
+                  <button *ngFor="let range of chartRanges" type="button" (click)="setChartRange(range.value)" [class.active]="chartRange === range.value">{{ range.label }}</button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-summary-row">
+                  <div class="chart-summary-item">
+                    <div class="chart-summary-label">Current Pair</div>
+                    <div class="chart-summary-value">BTC / USD</div>
+                  </div>
+                  <div class="chart-summary-item">
+                    <div class="chart-summary-label">24h Gain</div>
+                    <div class="chart-summary-value">+12.45%</div>
+                  </div>
+                  <div class="chart-summary-item">
+                    <div class="chart-summary-label">Market Cap</div>
+                    <div class="chart-summary-value">$2.45T</div>
+                  </div>
+                  <div class="chart-summary-item">
+                    <div class="chart-summary-label">Active Coins</div>
+                    <div class="chart-summary-value">{{ activeCoins }}</div>
+                  </div>
+                </div>
+                <div class="chart-wrapper">
+                  <canvas id="cryptoTrendChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 mb-3">
+            <div class="card movers-card mb-3">
+              <div class="card-header">
+                <h3 class="card-title">Top Gainers</h3>
+              </div>
+              <div class="card-body">
+                <div *ngIf="topGainers.length === 0" class="empty-state">Loading...</div>
+                <div *ngFor="let coin of topGainers" class="mover-row positive">
+                  <div class="mover-name">
+                    <img [src]="coin.image" [alt]="coin.name" />
+                    <div>
+                      <div class="mover-title">{{ coin.name }}</div>
+                      <small>{{ coin.symbol.toUpperCase() }}</small>
+                    </div>
+                  </div>
+                  <div class="mover-value">+{{ coin.price_change_percentage_24h.toFixed(2) }}%</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card movers-card">
+              <div class="card-header">
+                <h3 class="card-title">Top Losers</h3>
+              </div>
+              <div class="card-body">
+                <div *ngIf="topLosers.length === 0" class="empty-state">Loading...</div>
+                <div *ngFor="let coin of topLosers" class="mover-row negative">
+                  <div class="mover-name">
+                    <img [src]="coin.image" [alt]="coin.name" />
+                    <div>
+                      <div class="mover-title">{{ coin.name }}</div>
+                      <small>{{ coin.symbol.toUpperCase() }}</small>
+                    </div>
+                  </div>
+                  <div class="mover-value">{{ coin.price_change_percentage_24h.toFixed(2) }}%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card table-card">
+              <div class="card-header">
+                <h3 class="card-title">Top 50 Cryptocurrencies</h3>
+                <div class="table-meta">{{ topGainers.length ? 'Updated on ' + lastUpdate : 'Loading market data...' }}</div>
+              </div>
+              <div class="card-body table-responsive">
+                <table id="table1" class="table table-dark table-borderless align-middle">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Logo</th>
+                      <th>Coin</th>
+                      <th>Symbol</th>
+                      <th>Price (USD)</th>
+                      <th>24h %</th>
+                      <th>Market Cap</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

@@ -7,13 +7,13 @@ body.login-page {
 }
 
 body.dark-mode {
-  background-color: #0f172a;
+  background-color: #000000;
   color: #e2e8f0;
 }
 
 body.dark-mode .main-header.navbar {
-  background-color: #111827 !important;
-  border-bottom: 1px solid #1f2937;
+  background-color: #000000 !important;
+  border-bottom: 1px solid #111827;
 }
 
 body.dark-mode .main-header.navbar .nav-link,
@@ -25,7 +25,7 @@ body.dark-mode .main-header.navbar .navbar-nav .nav-link {
 
 body.dark-mode .main-sidebar,
 body.dark-mode .sidebar {
-  background-color: #111827 !important;
+  background-color: #000000 !important;
 }
 
 body.dark-mode .content-wrapper,
@@ -42,9 +42,9 @@ body.dark-mode .table-striped,
 body.dark-mode .description-block,
 body.dark-mode .form-control,
 body.dark-mode .progress {
-  background-color: #1f2937 !important;
+  background-color: #050505 !important;
   color: #e2e8f0 !important;
-  border-color: #334155 !important;
+  border-color: #111827 !important;
 }
 
 body.dark-mode .card-header {
@@ -87,12 +87,12 @@ body.dark-mode .nav-sidebar .nav-link.active {
 }
 
 body.dark-mode .main-footer {
-  background-color: #111827 !important;
+  background-color: #000000 !important;
   color: #cbd5e1 !important;
 }
 
 body.dark-mode .control-sidebar {
-  background-color: #0f172a !important;
+  background-color: #000000 !important;
 }
 
 /* Let the sidebar follow the page/content height instead of forcing viewport height.

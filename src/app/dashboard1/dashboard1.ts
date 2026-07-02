@@ -43,12 +43,18 @@ export class Dashboard1 implements AfterViewInit {
   ngAfterViewInit(): void {
     $('body').removeClass('sidebar-open').addClass('sidebar-closed sidebar-collapsed');
     this.muatDataDanGrafik();
-    this.initDashboardWidgets();
+    setTimeout(() => this.initDashboardWidgets(), 100);
   }
 
-  private initDashboardWidgets(): void {
+  private initDashboardWidgets(retry = 0): void {
     if (typeof $ === 'undefined') {
       console.warn('jQuery tidak tersedia untuk init dashboard widgets');
+      return;
+    }
+
+    const mapElement = document.getElementById('world-map');
+    if (!mapElement && retry < 3) {
+      setTimeout(() => this.initDashboardWidgets(retry + 1), 200);
       return;
     }
 

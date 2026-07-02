@@ -88,48 +88,71 @@
           <!-- ./col -->
         </div>
         <!-- /.row -->
-        <!-- Main row -->
-        <div class="row">
-          <!-- Left col -->
-          <section class="col-lg-7 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-chart-pie mr-1"></i>
-                  Bulan Lahir Mahasiswa/i
-                </h3>
-                <div class="card-tools">
-                  <ul class="nav nav-pills ml-auto">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
-                    </li>
-                  </ul>
-                </div>
-              </div><!-- /.card-header -->
-              <div class="card-body">
-                <div class="tab-content p-0">
-                  <!-- Morris chart - Sales -->
-                  <div class="chart tab-pane active" id="revenue-chart"
-                       style="position: relative; height: 300px;">
-                      <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
-                   </div>
-                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                    <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
-                  </div>
-                </div>
-              </div><!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+
+
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <section class="col-lg-7 connectedSortable">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    Bulan Lahir Mahasiswa/i + Jurusan Prodi
+                                </h3>
+                                <div class="card-tools">
+                                    <ul class="nav nav-pills ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#revenue-chart" data-toggle="tab" id="tab-area">Area</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#sales-chart" data-toggle="tab" id="tab-donut">Donut</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div><!-- /.card-header -->
+
+                            <div class="card-body">
+                                <div class="tab-content p-0">
+                                    <!-- Tab Area -->
+                                    <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
+                                        <canvas id="revenue-chart-canvas" height="300" style="height: 300px; width: 100%;"></canvas>
+                                    </div>
+
+                                    <!-- Tab Donut - JURUSAN/PRODI -->
+                                    <div class="tab-pane" id="sales-chart" style="position: relative; min-height: 350px; padding: 1rem;">
+                                        <div class="row">
+                                            <!-- Kolom Kiri: Grafik Donut Jurusan -->
+                                            <div class="col-md-7 d-flex align-items-center justify-content-center" style="min-height: 320px;">
+                                                <div class="donut-chart-wrapper">
+                                                    <canvas id="sales-chart-canvas" class="donut-chart-canvas"></canvas>
+                                                </div>
+                                            </div>
+                                            <!-- Kolom Kanan: Daftar Jurusan -->
+                                            <div class="col-md-5">
+                                                <div class="jurusan-panel">
+                                                    <h5 class="jurusan-panel-title">Daftar Jurusan/Prodi</h5>
+                                                    <div class="jurusan-list">
+                                                        <div *ngFor="let item of jurusanItems" class="jurusan-item">
+                                                            <span class="jurusan-color" [ngStyle]="{ 'background-color': item.color }"></span>
+                                                            <span class="jurusan-label">{{ item.label }}</span>
+                                                            <span class="jurusan-code">{{ item.code }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
 
             <!-- DIRECT CHAT -->
             <div class="card direct-chat direct-chat-primary">
               <div class="card-header">
                 <h3 class="card-title">Direct Chat</h3>
-
                 <div class="card-tools">
                   <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">

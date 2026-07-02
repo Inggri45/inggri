@@ -1,51 +1,116 @@
 <div class="wrapper">
-    <app-header></app-header>
-    <app-sidebar moduleName="forex"></app-sidebar>
+  <app-header></app-header>
+  <app-sidebar moduleName="forex"></app-sidebar>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Forex</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                            <li class="breadcrumb-item active">Forex</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
+  <div class="content-wrapper">
+
+    <!-- Header -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-3">
+          <div class="col-sm-6">
+            <h1 class="m-0" style="color:#1565C0; font-weight:700;">
+              <i class="fas fa-chart-line"></i> Forex
+            </h1>
+          </div>
+
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right" style="background:none;">
+              <li class="breadcrumb-item">
+                <a href="/dashboard" style="color:#1565C0;">
+                  Home
+                </a>
+              </li>
+              <li class="breadcrumb-item active">Forex</li>
+            </ol>
+          </div>
         </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <!-- Main row -->
-                <div class="row">
-                    <div id="tanggal" class="mb-3"></div>
-                <div class="table-responsive">
-                        <table id="table1" class="table table-hover table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Simbol</th>
-                                    <th>Nama Mata Uang</th>
-                                    <th>Kurs</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-                <!-- /.row (main row) -->
-            </div><!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
+      </div>
     </div>
-    <!-- /.content-wrapper -->
-    <app-footer></app-footer>
+
+    <!-- Content -->
+    <section class="content">
+      <div class="container-fluid">
+
+        <div class="card"
+          style="
+            border:none;
+            border-radius:12px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+            overflow:hidden;
+          ">
+
+          <!-- Card Header -->
+          <div class="card-header"
+            style="
+              background:linear-gradient(135deg,#1565C0,#42A5F5);
+              color:white;
+              border:none;
+            ">
+            <h3 class="card-title" style="font-weight:600;">
+              <i class="fas fa-coins"></i>
+              Data Kurs Mata Uang
+            </h3>
+          </div>
+
+          <!-- Card Body -->
+          <div class="card-body">
+
+            <div class="table-responsive">
+              <table
+                id="table1"
+                class="table table-bordered table-hover text-center"
+                style="margin-bottom:0;"
+              >
+
+                <thead
+                  style="
+                    background:#0967af;
+                    color:#0b224c;
+                  "
+                >
+                  <tr>
+                    <th style="width:70px;">No</th>
+                    <th style="width:120px;">Simbol</th>
+                    <th>Nama Mata Uang</th>
+                    <th style="width:220px;">Kurs (IDR)</th>
+                  </tr>
+                </thead>
+
+                <!--
+                <tbody>
+                  <tr *ngFor="let item of forexList; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>
+                      <span class="badge badge-primary">
+                        {{ item.symbol }}
+                      </span>
+                    </td>
+                    <td>{{ item.name }}</td>
+                    <td>
+                      {{ item.price | currency:'IDR':'symbol':'1.0-2' }}
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!forexList || forexList.length === 0">
+                    <td colspan="4" style="padding:20px;">
+                      Menunggu data...
+                    </td>
+                  </tr>
+                </tbody>
+                -->
+
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <app-footer></app-footer>
 </div>

@@ -1,0 +1,61 @@
+.donut-chart-wrapper {
+  width: 100%;
+  height: 320px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-chart-canvas {
+  width: 100% !important;
+  max-width: 320px;
+  height: 320px !important;
+}
+
+.jurusan-panel {
+  background: #f8f9fa;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  height: 100%;
+}
+
+.jurusan-panel-title {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.jurusan-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.jurusan-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.65rem 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.jurusan-color {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.jurusan-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.jurusan-code {
+  color: #6c757d;
+  font-size: 0.85rem;
+}

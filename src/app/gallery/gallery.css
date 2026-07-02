@@ -1,0 +1,43 @@
+:host { display: block; }
+
+.gallery-section {
+	max-width: 1100px;
+	margin: 48px auto;
+	padding: 24px;
+	color: #e9e6e2;
+	text-align: center;
+}
+
+.gallery-header { display:flex; align-items:center; justify-content:center; gap:18px; margin-bottom:28px; }
+.gallery-header .line { height:2px; width:120px; background: linear-gradient(90deg, transparent, rgba(255,215,180,0.6), transparent); }
+.gallery-header .line.small { width:80px; }
+.gallery-header .title { font-family: 'Brush Script MT', 'Lucida Handwriting', cursive; font-size:38px; color:#fff; text-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+
+.gallery-grid {
+	display:grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap:18px;
+	align-items:stretch;
+}
+
+.card {
+	display:block;
+	position:relative;
+	border-radius:10px;
+	overflow:hidden;
+	background: rgba(255,255,255,0.03);
+	min-height:140px;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+	transition: transform .25s ease, box-shadow .25s ease;
+}
+.card img { width:100%; height:160px; object-fit:cover; display:block; filter:brightness(.9); }
+.card .placeholder { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.45); font-size:28px; pointer-events:none; }
+.card:hover{ transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.7); }
+
+@media (max-width: 900px) {
+	.gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+	.gallery-grid { grid-template-columns: 1fr; }
+	.gallery-header .title { font-size:28px; }
+}

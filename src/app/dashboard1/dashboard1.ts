@@ -43,6 +43,142 @@ export class Dashboard1 implements AfterViewInit {
   ngAfterViewInit(): void {
     $('body').removeClass('sidebar-open').addClass('sidebar-closed sidebar-collapsed');
     this.muatDataDanGrafik();
+    this.initDashboardWidgets();
+  }
+
+  private initDashboardWidgets(): void {
+    if (typeof $ === 'undefined') {
+      console.warn('jQuery tidak tersedia untuk init dashboard widgets');
+      return;
+    }
+
+    const moment = (window as any).moment;
+    if ($.fn.daterangepicker && moment) {
+      $('.daterange').daterangepicker({
+        ranges: {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate: moment()
+      });
+    }
+
+    if ($.fn.knob) {
+      $('.knob').knob();
+    }
+
+    if ($.fn.vectorMap) {
+      const visitorsData: Record<string, number> = {
+        US: 398,
+        SA: 400,
+        CA: 1000,
+        DE: 500,
+        FR: 760,
+        CN: 300,
+        AU: 700,
+        BR: 600,
+        IN: 800,
+        GB: 320,
+        RU: 3000
+      };
+
+      $('#world-map').vectorMap({
+        map: 'usa_en',
+        backgroundColor: 'transparent',
+        regionStyle: {
+          initial: {
+            fill: 'rgba(255, 255, 255, 0.7)',
+            'fill-opacity': 1,
+            stroke: 'rgba(0,0,0,.2)',
+            'stroke-width': 1,
+            'stroke-opacity': 1
+          }
+        },
+        series: {
+          regions: [{
+            values: visitorsData,
+            scale: ['#ffffff', '#0154ad'],
+            normalizeFunction: 'polynomial'
+          }]
+        },
+        onRegionLabelShow: function (e: any, el: any, code: string) {
+          const visitorsCount = visitorsData[code];
+          if (typeof visitorsCount !== 'undefined') {
+            el.html(el.html() + ': ' + visitorsCount + ' new visitors');
+          }
+        }
+      });
+    }
+
+    const Sparkline = (window as any).Sparkline;
+    if (Sparkline) {
+      const chart1 = new Sparkline(document.getElementById('sparkline-1') as HTMLElement, { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' });
+      const chart2 = new Sparkline(document.getElementById('sparkline-2') as HTMLElement, { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' });
+      const chart3 = new Sparkline(document.getElementById('sparkline-3') as HTMLElement, { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' });
+      chart1.draw([1000, 1200, 920, 927, 931, 1027, 819, 930, 1021]);
+      chart2.draw([515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921]);
+      chart3.draw([15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21]);
+    }
+
+    if ($.fn.datetimepicker) {
+      $('#calendar').datetimepicker({
+        format: 'L',
+        inline: true
+      });
+    }
+
+    this.initLineChart();
+  }
+
+  private initLineChart(): void {
+    const chartElement = document.getElementById('line-chart') as HTMLCanvasElement;
+    if (!chartElement) {
+      return;
+    }
+
+    const ctx = chartElement.getContext('2d');
+    if (!ctx) {
+      return;
+    }
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['2011 Q1', '2011 Q2', '2011 Q3', '2011 Q4', '2012 Q1', '2012 Q2', '2012 Q3', '2012 Q4', '2013 Q1', '2013 Q2'],
+        datasets: [{
+          label: 'Sales',
+          data: [2666, 2778, 4912, 3767, 6810, 5670, 4820, 15073, 10687, 8432],
+          borderColor: '#ffffff',
+          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          fill: false,
+          tension: 0.4,
+          pointRadius: 3,
+          pointBackgroundColor: '#ffffff'
+        }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            ticks: { color: '#ffffff' },
+            grid: { display: false, color: '#efefef' }
+          },
+          y: {
+            ticks: { color: '#ffffff', stepSize: 5000 },
+            grid: { display: true, color: '#efefef' }
+          }
+        }
+      }
+    });
   }
 
   private muatDataDanGrafik() {
